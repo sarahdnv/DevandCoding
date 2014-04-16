@@ -2,6 +2,7 @@ package com.devcode.timekeeper.data;
 
 import java.util.Date;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -76,10 +77,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public int createLog(logItem log){
 		int recordsChanged = 0;
-		/*
-		 * creates a new log record in the database
-		 * creates any new interval or tag records as needed
-		 */
+		long logID;
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+		
+		cv.put(colLogDesc, log.getDescription());
+		
+		logID = db.insert(tblLog,colLogID,cv );
+		cv.clear();
+		
+		recordsChanged++;
+		
+		for (intervalItem interval : log.getIntervals()) {
+			cv.put(colIntervalLogID, logID);
+			cv.put(colIntervalStartTime, interval.getStartTime().toString());
+			cv.put(colIntervalEndTime, interval.getEndTime().toString());
+			db.insert(tblInterval, colIntervalID, cv);
+			
+			recordsChanged++;
+		}
 		
 		return recordsChanged;
 	}
@@ -100,5 +117,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		int recordsChanged = 0;
 		
 		return recordsChanged;
+	}
+	
+	public int getTagID(String tag){
+		int tagID = -1;
+		
+		return tagID;
 	}
 }
