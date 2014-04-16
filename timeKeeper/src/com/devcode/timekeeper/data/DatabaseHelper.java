@@ -1,5 +1,7 @@
 package com.devcode.timekeeper.data;
 
+import java.util.Date;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -82,9 +84,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return recordsChanged;
 	}
 	
-	public logItem readLog(){
+	public logItem readLog(Date date){
 		logItem log = new logItem();
 		
 		return log;
+	}
+	
+	public int updateLog(logItem orilog, logItem newlog){
+		int recordsChanged = 0;
+		
+		return recordsChanged;
+	}
+	
+	public int deleteLog(logItem log){
+		int recordsChanged = 0;
+		
+		return recordsChanged;
 	}
 }
