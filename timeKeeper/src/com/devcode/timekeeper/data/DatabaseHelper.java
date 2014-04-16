@@ -84,7 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		cv.put(colLogDesc, log.getDescription());
 		
-		logID = db.insert(tblLog,colLogID,cv );
+		logID = db.insert(tblLog,null,cv );
 		cv.clear();
 		
 		recordsChanged++;
@@ -93,16 +93,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cv.put(colIntervalLogID, logID);
 			cv.put(colIntervalStartTime, interval.getStartTime().toString());
 			cv.put(colIntervalEndTime, interval.getEndTime().toString());
-			db.insert(tblInterval, colIntervalID, cv);
+			db.insert(tblInterval, null, cv);
 			
 			recordsChanged++;
+			
+			cv.clear();
 		}
+		
+		for (tagItem tag : log.getTags()){
+			long tagID;
+			if((tagID = getTagID(tag.getDesc()))==-1){
+				cv.put(colTagDesc, tag.getDesc());
+				tagID = db.insert(tblTag, null, cv);
+				cv.clear();
+				
+				recordsChanged++;
+			}
+			
+			cv.put(colLogTagLogID, logID);
+			cv.put(colLogTagTagID, tagID);
+			db.insert(tblLogTag, null, cv);
+			
+			cv.clear();
+			
+			recordsChanged++;
+			
+		}
+		
+		db.close();
 		
 		return recordsChanged;
 	}
 	
-	public logItem readLog(Date date){
+	public logItem readLog(int id){
 		logItem log = new logItem();
+		
+		
 		
 		return log;
 	}
