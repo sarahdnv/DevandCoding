@@ -30,6 +30,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		  super(context, dbName, null,1); 
 		  }
 	
+	/*
+	 * The onCreate method is executed the first time the app is run on the device.
+	 * All the tables and triggers will be create here.
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		
@@ -68,4 +72,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	}
 
+	public int createLog(logItem log){
+		int recordsChanged = 0;
+		/*
+		 * creates a new log record in the database
+		 * creates any new interval or tag records as needed
+		 */
+		
+		return recordsChanged;
+	}
+	
+	public logItem readLog(){
+		logItem log = new logItem();
+		
+		return log;
+	}
 }
