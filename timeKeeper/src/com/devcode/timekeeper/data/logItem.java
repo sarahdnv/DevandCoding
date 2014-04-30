@@ -7,10 +7,16 @@ public class logItem {
 
 
 	private String description;
-	
 	private ArrayList<tagItem> tags;
-	
 	private ArrayList<intervalItem> intervals;
+	
+	//constructor
+	public logItem(){
+		description = "New Log";
+		tags = new ArrayList<tagItem>();
+		intervals = new ArrayList<intervalItem>();
+	}
+	
 	
 	public String getDescription() {
 		return description;

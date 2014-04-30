@@ -102,6 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		for (tagItem tag : log.getTags()){
 			long tagID;
+			
 			if((tagID = getTagID(tag.getDesc()))==-1){
 				cv.put(colTagDesc, tag.getDesc());
 				tagID = db.insert(tblTag, null, cv);

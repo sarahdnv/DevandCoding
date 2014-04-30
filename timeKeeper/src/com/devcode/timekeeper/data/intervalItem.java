@@ -5,7 +5,6 @@ import java.util.Date;
 public class intervalItem {
 
 	private Date startTime;
-	
 	private Date endTime;
 
 	public Date getStartTime() {
